@@ -88,6 +88,7 @@ cd antigravity-statusline-configuration
 ├── LICENSE                     # MIT 许可证
 ├── README.md                   # 详细使用与架构说明
 ├── install.sh                  # 一键部署与无缝升级脚本
+├── settings.json               # 生产环境配置（含权限、模型与状态栏挂载）
 ├── settings.json.example       # 配置示例参考
 └── statusline.sh               # 状态栏核心脚本（Python 实现，~27ms 渲染）
 ```

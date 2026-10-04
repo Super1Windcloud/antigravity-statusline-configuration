@@ -1,0 +1,33 @@
+{
+  "agentMode": "accept-edits",
+  "artifactReviewPolicy": "always-proceed",
+  "colorScheme": "dark",
+  "model": "Gemini 3.8 Flash (Medium)",
+  "permissions": {
+    "allow": [
+      "command(ls)",
+      "read_url(antigravity.google)",
+      "command(cat)",
+      "command(~/.gemini/antigravity-cli/bin/agy)",
+      "command(/opt/homebrew/bin/agy)"
+    ]
+  },
+  "runningLightSpeed": "fast",
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/super/.gemini/antigravity-cli/statusline.sh",
+    "enabled": true,
+    "stack_with_default": true
+  },
+  "toolPermission": "always-proceed",
+  "trustedWorkspaces": [
+    "/Users/super/super/blockman-go-android",
+    "/Users/super/tauri/audio-courier",
+    "/Users/super/super/blockman-go-android/Blockymods",
+    "/Users/super/WebstormProjects/exportFigmaAssets",
+    "/Users/super/super/blockmango-client",
+    "/Users/super/demo/sync_repo_to_gitlab",
+    "/Users/super/RustroverProjects/bevy-script-squadron-runtime",
+    "/Users/super/demo/hyperscoop"
+  ]
+}
