@@ -30,8 +30,15 @@ if [ -z "${PY_BIN}" ]; then
 fi
 echo "Using Python runtime: ${PY_BIN}"
 
-# 2. Backup existing statusline.sh if present
-echo "[2/4] Installing statusline script..."
+# 2. Install global engineering guide (GEMINI.md)
+echo "[2/5] Installing global engineering guide (GEMINI.md)..."
+mkdir -p "${HOME}/.gemini/config"
+cp "${SCRIPT_DIR}/GEMINI.md" "${HOME}/.gemini/config/GEMINI.md"
+cp "${SCRIPT_DIR}/GEMINI.md" "${HOME}/.gemini/config/AGENTS.md"
+cp "${SCRIPT_DIR}/GEMINI.md" "${TARGET_DIR}/AGENTS.md"
+
+# 3. Backup existing statusline.sh if present
+echo "[3/5] Installing statusline script..."
 if [ -f "${TARGET_SCRIPT}" ]; then
   cp "${TARGET_SCRIPT}" "${TARGET_SCRIPT}.bak"
   echo "Backed up existing script to ${TARGET_SCRIPT}.bak"
@@ -42,8 +49,8 @@ cp "${SCRIPT_DIR}/statusline.sh" "${TARGET_SCRIPT}"
 sed -i '' "1s|^#!.*|#!${PY_BIN}|" "${TARGET_SCRIPT}" 2>/dev/null || sed -i "1s|^#!.*|#!${PY_BIN}|" "${TARGET_SCRIPT}"
 chmod +x "${TARGET_SCRIPT}"
 
-# 3. Configure settings.json
-echo "[3/4] Updating ${SETTINGS_FILE}..."
+# 4. Configure settings.json
+echo "[4/5] Updating ${SETTINGS_FILE}..."
 "${PY_BIN}" - <<EOF
 import json
 import os
@@ -76,8 +83,8 @@ with open(settings_path, "w", encoding="utf-8") as f:
 print("Successfully configured statusLine in settings.json.")
 EOF
 
-# 4. Smoke test
-echo "[4/4] Verifying statusline execution..."
+# 5. Smoke test
+echo "[5/5] Verifying statusline execution..."
 TEST_PAYLOAD='{"cwd":"'${HOME}'","context_window":{"remaining_percentage":95,"total_input_tokens":50000,"size":1000000},"tasks":1}'
 echo "${TEST_PAYLOAD}" | "${TARGET_SCRIPT}"
 
