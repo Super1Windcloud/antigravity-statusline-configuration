@@ -21,13 +21,13 @@
   },
   "toolPermission": "always-proceed",
   "trustedWorkspaces": [
+    "/Users/super/super",
+    "/Users/super/tauri",
+    "/Users/super/RustroverProjects",
+    "/Users/super/WebstormProjects",
+    "/Users/super/demo",
     "/Users/super/super/blockman-go-android",
-    "/Users/super/tauri/audio-courier",
     "/Users/super/super/blockman-go-android/Blockymods",
-    "/Users/super/WebstormProjects/exportFigmaAssets",
-    "/Users/super/super/blockmango-client",
-    "/Users/super/demo/sync_repo_to_gitlab",
-    "/Users/super/RustroverProjects/bevy-script-squadron-runtime",
-    "/Users/super/demo/hyperscoop"
+    "/Users/super/super/blockmango-client"
   ]
 }
