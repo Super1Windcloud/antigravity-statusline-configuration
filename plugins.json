@@ -9,6 +9,10 @@
     {
       "id": "testkit",
       "source": "https://github.com/winhok/testkit.git"
+    },
+    {
+      "id": "Figma",
+      "source": "https://github.com/figma/mcp-server-guide"
     }
   ]
 }
