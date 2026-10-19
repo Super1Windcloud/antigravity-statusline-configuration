@@ -2,14 +2,31 @@
   "agentMode": "accept-edits",
   "artifactReviewPolicy": "always-proceed",
   "colorScheme": "dark",
-  "model": "Gemini 3.8 Flash (Medium)",
+  "model": "Gemini 3.8 Flash (High)",
   "permissions": {
     "allow": [
       "command(ls)",
       "read_url(antigravity.google)",
       "command(cat)",
       "command(~/.gemini/antigravity-cli/bin/agy)",
-      "command(/opt/homebrew/bin/agy)"
+      "command(/opt/homebrew/bin/agy)",
+      "command(git)",
+      "command(cargo)",
+      "command(pnpm)",
+      "command(npm)",
+      "command(bun)",
+      "command(yarn)",
+      "command(gradle)",
+      "command(./gradlew)",
+      "command(just)",
+      "command(python3)",
+      "command(uv)",
+      "command(go)",
+      "command(docker)",
+      "command(grep)",
+      "command(rg)",
+      "command(find)",
+      "command(jq)"
     ]
   },
   "runningLightSpeed": "fast",
@@ -21,13 +38,31 @@
   },
   "toolPermission": "always-proceed",
   "trustedWorkspaces": [
+    "/Users/super",
     "/Users/super/super",
     "/Users/super/tauri",
     "/Users/super/RustroverProjects",
     "/Users/super/WebstormProjects",
     "/Users/super/demo",
+    "/Users/super/Projects",
+    "/Users/super/workspace",
+    "/Users/super/Code",
+    "/Users/super/dev",
+    "/Users/super/Developer",
+    "/Users/super/work",
+    "/Users/super/src",
+    "/Users/super/github",
     "/Users/super/super/blockman-go-android",
     "/Users/super/super/blockman-go-android/Blockymods",
-    "/Users/super/super/blockmango-client"
-  ]
+    "/Users/super/super/blockmango-client",
+    "/Users/super/WebstormProjects/exportFigmaAssets",
+    "/Users/super/demo/hyperscoop",
+    "/Users/super/super/blockmango-client-shallow",
+    "/Users/super/super/blockymods",
+    "/Users/super/RustroverProjects/fuckport",
+    "/Users/super/super/admin-ui",
+    "/Users/super/super/blockman-go-android/Librarys/xlog-rs",
+    "/Users/super/super/blockman-go-android/Librarys/xlog-rs/crates/xlog-cli"
+  ],
+  "verbosity": "high"
 }
