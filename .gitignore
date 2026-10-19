@@ -12,3 +12,7 @@ __pycache__/
 # OS artifacts
 .DS_Store
 Thumbs.db
+
+# Installed third-party extension bodies (re-installed from declared git source)
+plugins/Figma/*
+!plugins/Figma/*.json
