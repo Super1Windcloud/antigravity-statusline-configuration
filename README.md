@@ -1,45 +1,26 @@
 # Antigravity Statusline Configuration
 
-## 配置、skills 与插件的同步安装
+## 配置同步与 Testkit 安装
 
-本仓库可独立使用，安装不依赖其他配置仓库。需要 Python 3.11+、Git 和对应 CLI；OpenCode 依赖安装需要 npm。
+本仓库独立使用；技能范围仅为 [Testkit](https://github.com/winhok/testkit)。需要 Python 3.11+、Git 和 Antigravity CLI；OpenCode 依赖安装另需 npm。
 
 ```bash
-# 仓库绝对路径执行；同步本机配置及 skills 到仓库
 /path/to/antigravity-statusline-configuration/sync.sh
-
-# 查看安装计划，不修改本机、不联网安装
 /path/to/antigravity-statusline-configuration/install.sh --dry-run
-
-# 安装配置、共享 skills 和插件
 /path/to/antigravity-statusline-configuration/install.sh
-
-# 仅部署仓库内文件，报告尚未恢复的插件与外部依赖
 /path/to/antigravity-statusline-configuration/install.sh --offline
 ```
 
-- `.harness.json` 声明本仓库的布局和默认同步范围；`scripts/harness.py` 随仓库分发，可独立运行。
-- 原有全局指令、配置、状态栏和 hooks 保持各自布局；新增 `harness/shared/skills/` 保存共享 skills 及其配套资源。
-- 安装将共享 skills 同时部署到 `~/.agents/skills/` 和 Antigravity 原生目录 `~/.gemini/config/skills/`，不依赖软链接或其他工具的插件缓存。
-- `plugins.json` 记录可恢复的插件来源；有来源的插件通过真实 CLI 安装，插件附带的 skills 随插件恢复。
-- 覆盖前备份到 `~/.harness-backups/<时间>/`；JSON 配置合并保留本机凭据，不清空用户技能或其他配置。
-- 常见凭据字段不入库，拒绝沿目标软链接覆盖其他文件。skills 包保留原始内容，包括上游测试样例；提交前仍需检查自定义资源中的凭据。
-- `--home /path/to/home` 可导出或安装到指定用户目录；正常目录软链接在导出时展开，运行时缓存、登录状态和会话不纳入同步。
-- 同步采用增量覆盖，不自动删除仓库文件。第三方插件按市场当前版本恢复，不承诺锁定全部插件版本。缺少 CLI 或离线跳过的项目会逐项列出，安装失败返回非零状态。
+- `sync.sh` 同步原有全局指令、配置、状态栏和 hooks，跳过本机所有 skills 目录。
+- `plugins.json` 仅保留 Testkit 插件及来源。Antigravity 的安装入口仅恢复 Testkit skills，不安装其他技能插件。
+- GitHub 不保存本机 skills 副本、系统 skills、其他 skills 的脚本或素材；`.gitignore` 阻止这些目录再次入库。本机已有的其他 skills 不会被卸载。
+- Claude Code 使用 `claude plugin install testkit@testkit`；Antigravity 使用 `agy plugin install https://github.com/winhok/testkit.git`；OpenCode 从清单固定的 Git commit 拉取 Testkit，部署到原生 `skills/<name>/SKILL.md`。
+- 旧版 `plugins/` 下的登记文件只作历史参考，不参与自动安装；安装来源以根目录 `plugins.json` 为准。旧清单中的其他插件也会被安装脚本忽略。
+- 覆盖前备份到 `~/.harness-backups/<时间>/`，JSON 配置合并保留本机凭据；`--home /path/to/home` 指定导出或安装目录。
+- 常见凭据字段会过滤，登录状态、会话、运行时缓存不入库；提交前仍需审查自定义配置。
+- `--dry-run` 不修改本机、不联网安装；`--offline` 仅部署配置，报告尚未恢复的 Testkit 和依赖。缺少 CLI 会报告跳过项，安装失败返回非零状态。
 
-CLI 配置部署到 `~/.gemini/antigravity-cli/`；`global/` 保存并部署 `~/.gemini/config/` 的全局指令、skills、agents、rules 和 workflows。状态栏 shebang 调整为安装时使用的 Python。插件通过 `agy plugin install <Git URL>` 恢复；历史 `plugins/` 目录仅作参考，不作为已安装状态。[Antigravity 插件文档](https://www.antigravity.google/docs/plugins?tab=cli)
-
-验证：
-
-```bash
-python3 -B -m unittest discover -s /path/to/antigravity-statusline-configuration/tests -v
-bash -n /path/to/antigravity-statusline-configuration/install.sh /path/to/antigravity-statusline-configuration/sync.sh
-```
-
-
-⚡ 高性能、高信息密度、环境自适应的 **Google Antigravity CLI** 状态栏（Statusline）生产级配置与脚本。
-
----
+验证：`python3 -B -m unittest discover -s /path/to/antigravity-statusline-configuration/tests -v`。
 
 ## ✨ 核心特性
 

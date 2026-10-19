@@ -1,10 +1,11 @@
 {
   "version": 1,
+  "testkit_skill_source": {
+    "url": "https://github.com/winhok/testkit.git",
+    "ref": "0c80ac38944bb70c6a60305c174dbc2a6a9767f2",
+    "subdir": "skills"
+  },
   "antigravity": [
-    {
-      "id": "Figma",
-      "source": "https://github.com/figma/mcp-server-guide"
-    },
     {
       "id": "testkit",
       "source": "https://github.com/winhok/testkit.git"
