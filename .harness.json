@@ -1,0 +1,11 @@
+{
+  "roots": {
+    "antigravity": ".",
+    "antigravity-global": "global"
+  },
+  "selected": [
+    "antigravity",
+    "antigravity-global",
+    "shared"
+  ]
+}

@@ -1,5 +1,42 @@
 # Antigravity Statusline Configuration
 
+## 配置、skills 与插件的同步安装
+
+本仓库可独立使用，安装不依赖其他配置仓库。需要 Python 3.11+、Git 和对应 CLI；OpenCode 依赖安装需要 npm。
+
+```bash
+# 仓库绝对路径执行；同步本机配置及 skills 到仓库
+/path/to/antigravity-statusline-configuration/sync.sh
+
+# 查看安装计划，不修改本机、不联网安装
+/path/to/antigravity-statusline-configuration/install.sh --dry-run
+
+# 安装配置、共享 skills 和插件
+/path/to/antigravity-statusline-configuration/install.sh
+
+# 仅部署仓库内文件，报告尚未恢复的插件与外部依赖
+/path/to/antigravity-statusline-configuration/install.sh --offline
+```
+
+- `.harness.json` 声明本仓库的布局和默认同步范围；`scripts/harness.py` 随仓库分发，可独立运行。
+- 原有全局指令、配置、状态栏和 hooks 保持各自布局；新增 `harness/shared/skills/` 保存共享 skills 及其配套资源。
+- 安装将共享 skills 同时部署到 `~/.agents/skills/` 和 Antigravity 原生目录 `~/.gemini/config/skills/`，不依赖软链接或其他工具的插件缓存。
+- `plugins.json` 记录可恢复的插件来源；有来源的插件通过真实 CLI 安装，插件附带的 skills 随插件恢复。
+- 覆盖前备份到 `~/.harness-backups/<时间>/`；JSON 配置合并保留本机凭据，不清空用户技能或其他配置。
+- 常见凭据字段不入库，拒绝沿目标软链接覆盖其他文件。skills 包保留原始内容，包括上游测试样例；提交前仍需检查自定义资源中的凭据。
+- `--home /path/to/home` 可导出或安装到指定用户目录；正常目录软链接在导出时展开，运行时缓存、登录状态和会话不纳入同步。
+- 同步采用增量覆盖，不自动删除仓库文件。第三方插件按市场当前版本恢复，不承诺锁定全部插件版本。缺少 CLI 或离线跳过的项目会逐项列出，安装失败返回非零状态。
+
+CLI 配置部署到 `~/.gemini/antigravity-cli/`；`global/` 保存并部署 `~/.gemini/config/` 的全局指令、skills、agents、rules 和 workflows。状态栏 shebang 调整为安装时使用的 Python。插件通过 `agy plugin install <Git URL>` 恢复；历史 `plugins/` 目录仅作参考，不作为已安装状态。[Antigravity 插件文档](https://www.antigravity.google/docs/plugins?tab=cli)
+
+验证：
+
+```bash
+python3 -B -m unittest discover -s /path/to/antigravity-statusline-configuration/tests -v
+bash -n /path/to/antigravity-statusline-configuration/install.sh /path/to/antigravity-statusline-configuration/sync.sh
+```
+
+
 ⚡ 高性能、高信息密度、环境自适应的 **Google Antigravity CLI** 状态栏（Statusline）生产级配置与脚本。
 
 ---
@@ -39,20 +76,7 @@ git:3a5bc7d [rebase]* ctx:88% (120k/1M)                     my-awesome-repo
 
 ## 🚀 一键安装
 
-克隆仓库并执行安装脚本：
-
-```bash
-git clone git@github.com:Super1Windcloud/antigravity-statusline-configuration.git
-cd antigravity-statusline-configuration
-./install.sh
-```
-
-安装脚本将自动执行以下操作：
-1. 探测宿主机最快、最直接的 `python3` 可执行环境；
-2. 自动备份现存的 `~/.gemini/antigravity-cli/statusline.sh`；
-3. 将优化版脚本部署至 `~/.gemini/antigravity-cli/statusline.sh` 并赋予执行权限；
-4. 安全注入配置到 `~/.gemini/antigravity-cli/settings.json`（保留所有其他设置不变）；
-5. 自动运行 Smoke Test 验证状态栏渲染与耗时。
+克隆仓库后，用仓库的绝对路径执行 `install.sh --dry-run` 预览，再执行 `install.sh`。新安装流程见本文开头：部署配置、全局指令和 skills，备份覆盖文件，并通过 `agy` 恢复插件。脚本不会启动模型会话；状态栏渲染可用下方示例输入单独验证。
 
 ---
 

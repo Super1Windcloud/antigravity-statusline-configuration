@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "antigravity": [
+    {
+      "id": "Figma",
+      "source": "https://github.com/figma/mcp-server-guide"
+    },
+    {
+      "id": "testkit",
+      "source": "https://github.com/winhok/testkit.git"
+    }
+  ]
+}
