@@ -1,5 +1,13 @@
 # 安装验证记录
 
+## Scrcpy MCP 还原补缺验证（2026-10-19）
+
+- `python3 -B -m unittest discover -s tests -v`：30 项通过；覆盖 Scrcpy 登记、其他 MCP/凭据保留和跨 agent 隔离。
+- core/full 均锁定 `scrcpy-mcp = 0.5.0`；既有依赖版本未改变，core 最低 Node 版本同步为 24。两份锁文件与 Claude 配置仓库一致。
+- 共享的锁文件已在 Claude 配置仓库的 `runtime/core/` 通过 npm ci 和真实 Scrcpy MCP initialize / tools/list，返回 39 个工具；本仓库未重复安装依赖。
+- 未在本机 Antigravity 配置上执行完整安装，未调用设备工具。
+
+
 ## 单 agent 安装隔离验证（2026-10-19）
 
 - `python3 -B -m unittest discover -s /Users/super/super/antigravity-statusline-configuration/tests`：29 项通过。
